@@ -7,19 +7,32 @@ set -e
 echo "Configure Marzban server host..."
 PAYLOAD="$(cat <<-EOF
 {
-  "Shadowsocks TCP": [
-    {
-      "remark": "🚀 Marz ({USERNAME}) [{PROTOCOL} - {TRANSPORT}]",
-      "address": "$SERVER_HOST",
-      "port": null,
-      "sni": null,
-      "host": null,
-      "security": "inbound_default",
-      "alpn": "",
-      "fingerprint": ""
-    }
-  ]
-}
+			"tag": "VLESS TCP REALITY",
+			"listen": "0.0.0.0",
+			"port": 443,
+			"protocol": "vless",
+			"settings": {
+				"clients": [],
+				"decryption": "none"
+			},
+			"streamSettings": {
+				"network": "tcp",
+				"tcpSettings": {},
+				"security": "reality",
+				"realitySettings": {
+					"show": false,
+					"dest": "rutube.ru:443",
+					"xver": 0,
+					"serverNames": ["rutube.ru"],
+					"privateKey": "sudo docker exec marzban-marzban-1 xray x25519",
+					"shortIds": ["openssl rand -hex 8"]
+				}
+			},
+			"sniffing": {
+				"enabled": true,
+				"destOverride": ["http", "tls", "quic"]
+			}
+		}
 EOF
 )"
 

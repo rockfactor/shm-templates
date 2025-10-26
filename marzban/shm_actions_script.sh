@@ -100,14 +100,14 @@ case $EVENT in
             exit 1
         fi
         ;;
-    CREATE)
-        echo "Create a new user"
+            CREATE)
+        echo "Create a new user with VLESS REALITY"
 
         PAYLOAD="{{ toJson(
             username = "us_" _ us.id
             proxies = {
-              shadowsocks = {
-                method = "chacha20-ietf-poly1305"
+              vless = {
+                flow = "xtls-rprx-vision"  
               }
             }
             data_limit = 0
@@ -116,8 +116,8 @@ case $EVENT in
             status = "active"
             note = "SHM: login=" _  user.login _ ", name=" _ user.full_name _ ", url=https://t.me/" _ user.settings.telegram.login
             inbounds = {
-              shadowsocks = [
-                "Shadowsocks TCP"
+              vless = [
+                "vless_reality"  
               ]
             }
         ).dquote

@@ -100,7 +100,7 @@ case $EVENT in
             exit 1
         fi
         ;;
-            CREATE)
+    CREATE)
         echo "Create a new user with VLESS REALITY"
 
         PAYLOAD="{{ toJson(
